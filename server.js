@@ -23,6 +23,7 @@ app.use(express.json());
 app.use("/", express.static(path.join(__dirname, "public")));
 
 app.use("/", require("./routes/root"));
+app.use("/auth", require("./routes/authRoutes"));
 app.use("/users", require("./routes/userRoutes"));
 app.use("/notes", require("./routes/noteRoutes"));
 
@@ -40,7 +41,7 @@ app.all("*", (req, res) => {
 app.use(errorHandler);
 
 mongoose.connection.once("open", () => {
-  console.log("Connecte to mongoDB");
+  console.log("Connected to mongoDB");
   app.listen(PORT, () => console.log(`The server is up at port: ${PORT}`));
 });
 

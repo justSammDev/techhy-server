@@ -1,8 +1,10 @@
-const experss = require("express");
+const express = require("express");
 const userController = require("../controllers/userController");
+const verifyJWT = require("../middleware/verifyJWT");
 
-const router = experss.Router();
+const router = express.Router();
 
+router.use(verifyJWT);
 router
   .route("/")
   .get(userController.getAllUsers)
